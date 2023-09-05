@@ -7,7 +7,7 @@ library(tidyr)
 
 files = list.files(path = ".",pattern = 'maf') 
 
-test = read.csv2('GERS261IQQ-2TAD126_R_2022_12_06_10_41_36_user_GSS5PR-0489-82-GERSOM_4_05_12_22_CHIP1_IonXpress_003_normalized_somatic.maf',sep='\t',skip = 1) 
+test = read.csv2('file.maf',sep='\t',skip = 1) 
 
 df = data.frame(matrix(ncol=ncol(test))) 
 
