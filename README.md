@@ -34,6 +34,11 @@ df = df[,c('Hugo_Symbol','Chromosome','Start_Position','End_Position','Reference
 write.table(df,'data_mutations_gersom.maf',row.names = F, quote = F,sep= '\t') 
 
 ```
+### Log AWS
+
+```{bash}
+ssh -i $key.pem ec2-user@15.160.44.209 
+```
 
 ### Genome-nexus 
 
@@ -52,6 +57,6 @@ docker-compose run cbioportal metaImport.py -u http://cbioportal:8080 -s /study/
 
 ## GITSIC  
 
-To transform copy number variation values (to verify)
+To transform copy number variation values 
 
-Gistic_format = log2(copy number + 2) - 1  
+Gistic_format = round( log2(copy number + 2) - 1 )
