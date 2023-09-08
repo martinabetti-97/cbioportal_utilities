@@ -34,11 +34,23 @@ df = df[,c('Hugo_Symbol','Chromosome','Start_Position','End_Position','Reference
 write.table(df,'data_mutations_gersom.maf',row.names = F, quote = F,sep= '\t') 
 
 ```
-### Log AWS
+### Macchina AWS
+
+#### Access 
+```{bash}
+ssh -i $key.pem ec2-user@15.160.44.209
+```
+Study folders in ```{bash}/home/cbioftp/study```
+
+#### Generate dataset 
+Compile dataset generation. This step both validate and update the dataset.
+
 
 ```{bash}
-ssh -i $key.pem ec2-user@15.160.44.209 
+cd /home/ec2-user/cbioportal-docker-compose
+docker-compose run cbioportal metaImport.py -u http://cbioportal:8080 -s /study/name --override_warning
 ```
+
 
 ### Genome-nexus 
 
@@ -48,12 +60,6 @@ If the annotation of the mutations file is not compliant, re-annotate with the f
 docker run -v ${PWD}:/wd genomenexus/gn-annotation-pipeline:master --filename /wd/data_mutations_backup.txt  --output-filename /wd/output.txt 
 ```
 
-## Cbioportal generate dataset 
-Compile dataset generation. This step both validate and update the dataset.
-
-```{bash}
-docker-compose run cbioportal metaImport.py -u http://cbioportal:8080 -s /study/gersom --override_warning
-```
 
 ## GITSIC  
 
